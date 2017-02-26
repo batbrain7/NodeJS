@@ -16,7 +16,7 @@ connection.connect(function(err) {
 
 
 function insertdata(id,name,mob,res) {
-	connection.query("insert into cust (custid,custname,custmobile) values ("+id+",'"+name+"',"+mob+");",function(err,result) {
+	connection.query("insert into cust (custid,custname,custmobile) values (" + id + ",'" + name + "'," + mob + ");",function(err,result) {
 		if(err) {
 			console.log(err.stack);
 			return;
@@ -26,4 +26,30 @@ function insertdata(id,name,mob,res) {
 	});
 };
 
+function updatedata(id,name,res) {
+	connection.query("update cust set custname = '" + name + "' where custid = " + id +";",function(err,result) {
+		if(err) {
+			console.log(err.stack);
+		} else {
+			console.log(result);
+		}
+	});
+}
+
+function deletequery(id,res) {
+	connection.query("delete from cust where custid = " + id + ";" ,function (err,result) {
+		if(err) {
+			console.log(err.stack);
+			return;
+		} else {
+			console.log(result);
+		}
+	});
+}
+
 module.exports.insertd = insertdata;
+module.exports.deleted = deletequery;
+module.exports.updated = updatedata;
+
+
+
